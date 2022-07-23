@@ -8,11 +8,11 @@ interface Props {
 
 }
 
-const steghanographyValue = "";
+const steghanographyValue = "key123123";
 
 export default function XSSStep(props: PropsWithChildren<Props>) {
   const [inputValue, setInputValue] = useState<string>("valor");
-  const [responseValue, setResponseValue] = useState("");
+  const [responseValue, setResponseValue] = useState<string>("");
   
   const handleSubmit = async(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     // eval(inputValue);
