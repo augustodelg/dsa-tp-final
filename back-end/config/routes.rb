@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   scope "stepper" do
     post "xss" => "stepper#xss"
     put "flag/:step/" => "stepper#validate_flag"
+    get "noVasADeducirNadaConLaUrl" => "stepper#cookie_flag"
   end
 end
