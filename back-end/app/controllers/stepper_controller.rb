@@ -1,4 +1,6 @@
 class StepperController < ApplicationController
+  include ActionController::Cookies
+  include ActionController::RequestForgeryProtection
 
   def has_html(text)
     text.match(/<\/?[^>]+>/)
@@ -23,6 +25,29 @@ class StepperController < ApplicationController
       response,
       []
     )
+  end
+
+  def cookie_flag
+    if !cookies["user_role"]
+      render_json(
+        true,
+        'No hay cookies, algo rompiste',
+        []
+      )
+    end
+      role = Role.find(cookies["user_role"])
+      message=''
+      if role.name == "admin"
+        message =  ValidationService.instance.get_flag(1)
+      else
+        message = "NOPE, vos no tenes permiso para ver esto"
+      end
+    render_json(
+      true,
+      message,
+      []
+    )
+    
   end
 
   def validate_flag
