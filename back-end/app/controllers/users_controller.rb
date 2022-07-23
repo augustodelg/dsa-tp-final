@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   # GET /users
   def index
     if params[:username]
-      sql = "Select username, first_name, last_name, age  from users where username = '#{params[:username]}'"
+      sql = "Select username, first_name, last_name, age  from users where username LIKE '%#{params[:username]}%'"
     else
       sql = "Select username, first_name, last_name, age  from users"
     end
@@ -11,9 +11,4 @@ class UsersController < ApplicationController
   end
 
 
-  private
-    # Only allow a list of trusted parameters through.
-    def user_params
-      params.require(:user).permit(:username)
-    end
 end
