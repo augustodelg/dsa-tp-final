@@ -1,16 +1,15 @@
 import { Grid } from "@mui/material";
 import { Box } from "@mui/system";
-import { Fragment, useRef, useState } from "react";
+import { Fragment, PropsWithChildren, useRef, useState } from "react";
 import AppInput from "../general/AppInput";
 import TableUser from "./components/TableUser/TableUser";
 
-export default function SQLInjectionStep() {
+interface Props {
+  advanceToNextStep: () => void;
+}
+
+export default function SQLInjectionStep(props: PropsWithChildren<Props>) {
   let [usernameInput, setUsernameInput] = useState<string>("");
-  function changeRef(
-    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) {
-    setUsernameInput(e.target.value);
-  }
 
   return (
     
@@ -20,14 +19,14 @@ export default function SQLInjectionStep() {
         justifyContent="flex-start"
         alignItems="flex-start"
         spacing={2}
-        style={{ width: "80vw", margin: "0 auto"}}
+        style={{ width: "100%", margin: "0 auto"}}
       >
         <Grid item xs={12}>
           <AppInput
             label="Buscador por username"
             name="username"
             placeholder="DSAuser"
-            onChange={changeRef}
+            onChange={(event) => setUsernameInput(event.target.value) }
           />
         </Grid>
         <Grid width={'100%'} item xs={12} >

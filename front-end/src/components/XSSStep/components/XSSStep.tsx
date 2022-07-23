@@ -5,7 +5,7 @@ import GenericService from "../../../services/GenericService";
 import AppInput from '../../general/AppInput';
 
 interface Props {
-
+  advanceToNextStep: () => void;
 }
 
 const steghanographyValue = "key123123";
@@ -39,7 +39,7 @@ export default function XSSStep(props: PropsWithChildren<Props>) {
       </Box>
       <Box component='div' style={{ marginTop: '1em' }}>
         <AppInput
-          placeholder="Intenta algo :)"
+          placeholder="Podes poner tu nombre 👀"
           name="inputValue"
           label=""
           onChange={(event) => setInputValue(event.target.value)}

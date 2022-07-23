@@ -1,49 +1,81 @@
+import { Container, Step, StepLabel } from "@mui/material";
 import Box from "@mui/material/Box";
 import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-
-import React, { useState, useEffect, PropsWithChildren } from "react";
-import XSSStep from "./XSSStep/components/XSSStep";
+import React, { PropsWithChildren } from "react";
+import { stepperLabel } from "../interfaces/AppStep";
+import AppInput from "./general/AppInput";
 import SQLInjectionStep from "./SQLInjectionStep/SQLInjectionStep";
-import { Container } from "@mui/material";
+import SteganographyStep from "./SteganographyStep/components/SteganographyStep";
+import XSSStep from "./XSSStep/components/XSSStep";
+
 
 interface Props {
 
 }
 
 export default function GeneralStepper(props: PropsWithChildren<Props>) {
-  const [activeStep, setActiveStep] = React.useState<number>(1);
+  const [activeStep, setActiveStep] = React.useState<number>(0);
+
+  const updateCurrentStep = () => {
+    setActiveStep(activeStep + 1)
+  }
 
   const appSteps: Array<JSX.Element> = [
     <SQLInjectionStep
-
+      advanceToNextStep={() => setActiveStep(activeStep + 1)}
     />,
     <XSSStep
-
+      advanceToNextStep={() => setActiveStep(activeStep + 1)}
     />,
-    // <SteganographyStep 
+    <SteganographyStep
 
-    // />
+    />
   ]
 
   return (
     <Container style={{ display: 'flex', justifyContent: 'center', marginTop: '3em' }}>
-      <Box component="div">
-        <Stepper activeStep={activeStep}>
+      <Box component="div" style={{ width: '100%' }}>
+        <Stepper activeStep={activeStep} style={{ width: '100%', marginBottom: '2em' }}>
           {
-            appSteps.map((appStep) => {
+            stepperLabel.map((stepLabel, index) => {
+              const stepProps: { completed?: boolean } = {};
+              const labelProps: { optional?: React.ReactNode } = {};
+
+              if (index < activeStep) {
+                stepProps.completed = true;
+                labelProps.optional = (
+                  <div onClick={() => setActiveStep(index)}>
+                    Ir Aqui
+                  </div>
+                )
+              }
+
               return (
-                <>
-                </>
+                <Step key={stepLabel} {...stepProps}>
+                  <StepLabel {...labelProps} > {stepLabel} </StepLabel>
+                </Step>
               )
             })
           }
 
+
+        </Stepper>
+        <Box>
+          {/* <AppInput
+            placeholder={`Flag del step ${activeStep} `}
+            name="flag"
+            label=""
+            onChange={(event) => setInputValue(event.target.value)}
+          /> */}
+        </Box>
+        <Box component="div" style={{ width: '100%' }}>
           {
             appSteps[activeStep]
           }
-        </Stepper>
+        </Box>
+        <div onClick={() => updateCurrentStep()}>
+          akdasda
+        </div>
       </Box>
     </Container>
   )
