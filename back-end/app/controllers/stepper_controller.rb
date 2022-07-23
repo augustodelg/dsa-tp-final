@@ -1,11 +1,21 @@
 class StepperController < ApplicationController
 
+  def has_html(text)
+    true
+  end
+  
   def xss
-    input = params[:input]
-    response = ""
-    if input.include? "script"
-      response = "flag{xss_adentro}"
+    response = params[:value]
+    if has_html(response)
+      response = "#{response} - flag{xss_adentro}"
     end
+
+    render_json(
+      true,
+      response,
+      []
+    )
+
   end
 
 end

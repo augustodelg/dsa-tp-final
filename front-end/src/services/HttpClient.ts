@@ -25,6 +25,16 @@ class HttpClient {
       async extractJson<T>(response: Response): Promise<T> {
         return await response.json();
       }
+
+      async post<T>(endpoint: string, bodyPayload: object): Promise<T> {
+        const response = await fetch(this.backend + endpoint, {
+          method: "POST",
+          headers: this.getHttpHeaders(),
+          body: JSON.stringify(bodyPayload),
+        });
+        const data = await this.extractJson<T>(response);
+        return data;
+      }
 }
 
 export default new HttpClient();

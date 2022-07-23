@@ -1,31 +1,43 @@
-import React, { useState, useEffect, PropsWithChildren } from "react";
+import { Button, Typography } from "@mui/material";
 import Box from '@mui/material/Box';
+import React, { PropsWithChildren, useState } from "react";
+import GenericService from "../../../services/GenericService";
 import AppInput from '../../general/AppInput';
-import { Button } from "@mui/material";
 
 interface Props {
 
 }
 
-const flag = "";
+const steghanographyValue = "";
 
 export default function XSSStep(props: PropsWithChildren<Props>) {
-  const [inputValue, setInputValue] = useState<string>("");
-
-  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    eval(inputValue);
-    if (inputValue.includes("script")) {
-      
-      console.log(`Util data: ${flag}`)
+  const [inputValue, setInputValue] = useState<string>("valor");
+  const [responseValue, setResponseValue] = useState("");
+  
+  const handleSubmit = async(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    // eval(inputValue);
+    const response = await GenericService.postXss(inputValue);
+    setResponseValue(response.payload!);
+    if (response.payload?.includes("flag{")) {
+      alert("Los logs son importantes tambien 👀")
+      console.log(steghanographyValue);
     }
   }
 
+  const createMarkup = () => {
+    return {__html: responseValue};
+  }
+
   return (
-    <>
+    <Box component='div'>
       <Box component='div'>
+          <div>
+            Hola :)
+          </div>
+          <div dangerouslySetInnerHTML={createMarkup()}/>
 
       </Box>
-      <Box component='div'>
+      <Box component='div' style={{ marginTop: '1em' }}>
         <AppInput
           placeholder="Intenta algo :)"
           name="inputValue"
@@ -33,9 +45,9 @@ export default function XSSStep(props: PropsWithChildren<Props>) {
           onChange={(event) => setInputValue(event.target.value)}
         />
       </Box>
-      <Box>
-        <Button onClick={(event) => handleSubmit(event)} variant="outlined">Search</Button>
+      <Box component='div' style={{ marginTop: '1em' }}>
+        <Button onClick={(event) => handleSubmit(event)} variant="outlined">OK</Button>
       </Box>
-    </>
+    </Box>
   )
 }
