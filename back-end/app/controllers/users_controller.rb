@@ -7,7 +7,7 @@ class UsersController < ApplicationController
       sql = "Select username, first_name, last_name, age  from users"
     end
     users = ActiveRecord::Base.connection.execute(sql)
-    render json: users
+    render_json(true, users, nil)
   end
 
 
