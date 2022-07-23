@@ -26,10 +26,11 @@ class StepperController < ApplicationController
   end
 
   def validate_flag
-    step, value = params.values_at(:loved_one_id, :charity_option)
-    value_correct = ValidationService.instance.validate_flag(step, value)
+    step, value = params.values_at(:step, :value)
+    validation_service = ValidationService.instance
+    value_correct = validation_service.validate_flag(step, value)
     render_json(
-      true,
+      value_correct,
       value_correct,
       []
     )

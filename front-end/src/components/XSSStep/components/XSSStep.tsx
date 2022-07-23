@@ -5,7 +5,6 @@ import GenericService from "../../../services/GenericService";
 import AppInput from '../../general/AppInput';
 
 interface Props {
-  advanceToNextStep: () => void;
 }
 
 const steghanographyValue = "key123123";
@@ -15,7 +14,6 @@ export default function XSSStep(props: PropsWithChildren<Props>) {
   const [responseValue, setResponseValue] = useState<string>("");
   
   const handleSubmit = async(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    // eval(inputValue);
     const response = await GenericService.postXss(inputValue);
     setResponseValue(response.payload!);
     if (response.payload?.includes("flag{")) {

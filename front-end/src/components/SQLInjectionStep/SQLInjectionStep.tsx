@@ -5,7 +5,6 @@ import AppInput from "../general/AppInput";
 import TableUser from "./components/TableUser/TableUser";
 
 interface Props {
-  advanceToNextStep: () => void;
 }
 
 export default function SQLInjectionStep(props: PropsWithChildren<Props>) {

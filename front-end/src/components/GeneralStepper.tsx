@@ -3,10 +3,12 @@ import Box from "@mui/material/Box";
 import Stepper from '@mui/material/Stepper';
 import React, { PropsWithChildren } from "react";
 import { stepperLabel } from "../interfaces/AppStep";
+import FlagInput from "./FlagInput/FlagInput";
 import AppInput from "./general/AppInput";
 import SQLInjectionStep from "./SQLInjectionStep/SQLInjectionStep";
 import SteganographyStep from "./SteganographyStep/components/SteganographyStep";
 import XSSStep from "./XSSStep/components/XSSStep";
+import Divider from '@mui/material/Divider';
 
 
 interface Props {
@@ -14,21 +16,22 @@ interface Props {
 }
 
 export default function GeneralStepper(props: PropsWithChildren<Props>) {
-  const [activeStep, setActiveStep] = React.useState<number>(0);
+  const [activeStep, setActiveStep] = React.useState<number>(2);
 
   const updateCurrentStep = () => {
-    setActiveStep(activeStep + 1)
+    let newValue = activeStep + 1;
+    if (newValue > stepperLabel.length - 1) {
+      alert("Gracias por jugar ! ")
+    }
+    setActiveStep(Math.min(newValue, stepperLabel.length - 1))
   }
 
   const appSteps: Array<JSX.Element> = [
     <SQLInjectionStep
-      advanceToNextStep={() => setActiveStep(activeStep + 1)}
     />,
     <XSSStep
-      advanceToNextStep={() => setActiveStep(activeStep + 1)}
     />,
     <SteganographyStep
-
     />
   ]
 
@@ -57,25 +60,25 @@ export default function GeneralStepper(props: PropsWithChildren<Props>) {
               )
             })
           }
-
-
         </Stepper>
+
         <Box>
-          {/* <AppInput
-            placeholder={`Flag del step ${activeStep} `}
-            name="flag"
-            label=""
-            onChange={(event) => setInputValue(event.target.value)}
-          /> */}
+          <FlagInput
+            activeStep={activeStep}
+            onSuccess={() => updateCurrentStep()}
+          />
+          <Divider />
         </Box>
+
         <Box component="div" style={{ width: '100%' }}>
+          <Box style={{ fontWeight: '600', textAlign: 'center', marginTop: '1em', marginBottom: '1em' }}>
+            PLAYGROUND
+          </Box>
           {
             appSteps[activeStep]
           }
         </Box>
-        <div onClick={() => updateCurrentStep()}>
-          akdasda
-        </div>
+        
       </Box>
     </Container>
   )

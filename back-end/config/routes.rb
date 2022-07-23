@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   
   scope "stepper" do
     post "xss" => "stepper#xss"
-    put "flag/:step/" => "stepper#validate_flag"
+    post "flag/:step" => "stepper#validate_flag"
   end
 end
