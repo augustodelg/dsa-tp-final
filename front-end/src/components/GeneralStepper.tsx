@@ -4,6 +4,8 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 
 import React, { useState, useEffect, PropsWithChildren } from "react";
+import XSSStep from "./XSSStep/components/XSSStep";
+import SQLInjectionStep from "./SQLInjectionStep/SQLInjectionStep";
 
 interface Props {
 
@@ -13,24 +15,27 @@ export default function GeneralStepper(props: PropsWithChildren<Props>) {
   const [activeStep, setActiveStep] = React.useState<number>(0);
 
   const appSteps: Array<JSX.Element> = [
-    <SQLInjectionStep 
+    <SQLInjectionStep
 
     />,
-    <XSSStep 
-    
-    />,
-    <SteganographyStep 
+    <XSSStep
 
-    />
+    />,
+    // <SteganographyStep 
+
+    // />
   ]
 
   return (
     <Box component="div">
       <Stepper activeStep={activeStep}>
         {
-          appSteps.map( (appStep) => {
-            return
-          } )
+          appSteps.map((appStep) => {
+            return (
+              <>
+              </>
+            )
+          })
         }
       </Stepper>
     </Box>
