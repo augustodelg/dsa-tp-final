@@ -1,7 +1,8 @@
 class StepperController < ApplicationController
 
   def has_html(text)
-    true
+    html_regex = "<\s*([^ >]+)[^>]*>.*?<\s*/\s*\1\s*>"
+    text.match(/<\/?[^>]+>/)
   end
   
   def xss

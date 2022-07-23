@@ -1,4 +1,4 @@
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import Box from '@mui/material/Box';
 import React, { PropsWithChildren, useState } from "react";
 import GenericService from "../../../services/GenericService";
