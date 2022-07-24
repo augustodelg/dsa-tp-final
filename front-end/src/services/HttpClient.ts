@@ -8,6 +8,8 @@ class HttpClient {
         const response = await fetch(this.backend + endpoint, {
           method: "GET",
           headers: this.getHttpHeaders(),
+          mode: 'cors',
+          credentials: 'include'
         });
         const data = await this.extractJson<T>(response);
         return data;
@@ -18,6 +20,7 @@ class HttpClient {
         
         requestHeaders.set('Content-Type', 'application/json');
         requestHeaders.set('Accept', 'application/json');
+        
         return requestHeaders;
     
       }
