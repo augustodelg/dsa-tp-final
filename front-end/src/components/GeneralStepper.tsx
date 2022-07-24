@@ -16,10 +16,14 @@ interface Props {
 }
 
 export default function GeneralStepper(props: PropsWithChildren<Props>) {
-  const [activeStep, setActiveStep] = React.useState<number>(2);
+  const [activeStep, setActiveStep] = React.useState<number>(0);
+  const [maxStepSolved, setMaxStepSolved] = React.useState<number>(0);
 
   const updateCurrentStep = () => {
     let newValue = activeStep + 1;
+    if (newValue > maxStepSolved) {
+      setMaxStepSolved(Math.min(newValue, stepperLabel.length - 1));
+    }
     if (newValue > stepperLabel.length - 1) {
       alert("Gracias por jugar ! ")
     }
@@ -29,6 +33,8 @@ export default function GeneralStepper(props: PropsWithChildren<Props>) {
   const appSteps: Array<JSX.Element> = [
     <SQLInjectionStep
     />,
+    <>
+    </>,
     <XSSStep
     />,
     <SteganographyStep
@@ -44,7 +50,7 @@ export default function GeneralStepper(props: PropsWithChildren<Props>) {
               const stepProps: { completed?: boolean } = {};
               const labelProps: { optional?: React.ReactNode } = {};
 
-              if (index < activeStep) {
+              if (index < activeStep || index < maxStepSolved) {
                 stepProps.completed = true;
                 labelProps.optional = (
                   <div onClick={() => setActiveStep(index)}>
@@ -78,7 +84,7 @@ export default function GeneralStepper(props: PropsWithChildren<Props>) {
             appSteps[activeStep]
           }
         </Box>
-        
+
       </Box>
     </Container>
   )
