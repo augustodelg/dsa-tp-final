@@ -7,7 +7,7 @@ import AppInput from '../../general/AppInput';
 interface Props {
 }
 
-const steghanographyValue = "key123123";
+const steghanographyValue = `dato:21232f297a57a5a743894a0e4a801fc3`;
 
 export default function XSSStep(props: PropsWithChildren<Props>) {
   const [inputValue, setInputValue] = useState<string>("valor");

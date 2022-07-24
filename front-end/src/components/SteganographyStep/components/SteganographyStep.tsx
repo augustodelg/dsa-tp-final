@@ -25,7 +25,7 @@ export default function SteganographyStep(props: PropsWithChildren<Props>) {
           height: 500,
           width: 500,
         }}
-        src={require("../../../assets/messirve_v2.jpg")}
+        src={require("../../../assets/messirve_v3.jpg")}
       />
       <Box style={{ marginTop: '2em', marginLeft: '1em', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
         <AppInput 
