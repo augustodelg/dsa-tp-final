@@ -7,7 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
-document.cookie = "user_role=2";
+document.cookie = "user_role=2;same_site= none;secure";
 root.render(
   <React.StrictMode>
     <App />

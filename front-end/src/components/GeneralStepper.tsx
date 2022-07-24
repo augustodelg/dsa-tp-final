@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Stepper from '@mui/material/Stepper';
 import React, { PropsWithChildren } from "react";
 import { stepperLabel } from "../interfaces/AppStep";
+import CookieStep from "./CookieStep/CookieStep";
 import FlagInput from "./FlagInput/FlagInput";
 import AppInput from "./general/AppInput";
 import SQLInjectionStep from "./SQLInjectionStep/SQLInjectionStep";
@@ -33,8 +34,8 @@ export default function GeneralStepper(props: PropsWithChildren<Props>) {
   const appSteps: Array<JSX.Element> = [
     <SQLInjectionStep
     />,
-    <>
-    </>,
+    <CookieStep />
+    ,
     <XSSStep
     />,
     <SteganographyStep

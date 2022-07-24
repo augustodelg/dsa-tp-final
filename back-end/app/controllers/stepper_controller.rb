@@ -29,12 +29,14 @@ class StepperController < ApplicationController
 
   def cookie_flag
     if !cookies["user_role"]
-      render_json(
+      return render_json(
         true,
         'No hay cookies, algo rompiste',
         []
       )
     end
+    puts 'la cookieee'
+    puts cookies["user_role"]
       role = Role.find(cookies["user_role"])
       message=''
       if role.name == "admin"
@@ -42,7 +44,7 @@ class StepperController < ApplicationController
       else
         message = "NOPE, vos no tenes permiso para ver esto"
       end
-    render_json(
+    return render_json(
       true,
       message,
       []

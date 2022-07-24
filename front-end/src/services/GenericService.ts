@@ -7,6 +7,10 @@ class GenericService {
     const response: ApiResponse<string> = await HttpClient.post("stepper/xss",{value} );
     return response;
   }
+  async getCookies(): Promise<ApiResponse<string>> {
+    const response: ApiResponse<string> = await HttpClient.get("stepper/noVasADeducirNadaConLaUrl");
+    return response;
+  }  
   
   async validateFlag(step: number, value: string): Promise<ApiResponse<boolean>> {
     const response: ApiResponse<boolean> = await HttpClient.post(`stepper/flag/${step}`, {value} );
