@@ -7,6 +7,10 @@ class ValidationService
     @instance
   end 
 
+  def self.instance
+    @instance
+  end
+  
   FLAGS = {
     0 => "flag{User_Boton}",
     1 => "flag{ojito_RBAC}",
@@ -19,7 +23,7 @@ class ValidationService
   end
   
   def validate_flag(step_number,value)
-    FLAGS[step_number] == value
+    FLAGS[step_number.to_i] == value
   end
 
 end
