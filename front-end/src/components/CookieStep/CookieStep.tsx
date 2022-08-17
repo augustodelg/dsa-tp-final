@@ -1,5 +1,5 @@
-import { Button, Grid, Typography } from "@mui/material";
-import { Fragment, PropsWithChildren, useEffect, useRef, useState } from "react";
+import { Button, Grid, Paper, Typography } from "@mui/material";
+import { PropsWithChildren, useEffect, useState } from "react";
 import GenericService from "../../services/GenericService";
 
 interface Props {
@@ -22,15 +22,21 @@ export default function CookieStep(props: PropsWithChildren<Props>) {
       <Grid
         container
         direction="column"
-        justifyContent="flex-start"
-        alignItems="flex-start"
+        justifyContent="center"
+        alignItems="center"
         spacing={2}
         style={{ width: "100%", margin: "0 auto"}}
       >
         <Grid item xs={12}>
-          {response && <Typography variant="h6">{response}</Typography>}
+          {response && <Typography variant="h6">
+              <Paper sx={{p: 3, borderRadius: '1em'}}>
+                {response}
+              </Paper>
+              </Typography>}
         </Grid>
-        <Button onClick={(event) => getData()} variant="outlined">Intentar</Button>
+        <Grid item xs={12}>
+            <Button onClick={(event) => getData()} variant="outlined">Intentar</Button>
+        </Grid>
       </Grid>
     
   );

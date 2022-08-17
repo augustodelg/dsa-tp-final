@@ -13,7 +13,7 @@ class StepperController < ApplicationController
   def xss
     response = params[:value]
     if has_html(response)
-      response = "#{response} - flag{xss_adentro}"
+      response = "#{response} - #{ValidationService.instance.get_flag(2)}"
     end
 
     if include_script_tag(response)
@@ -35,8 +35,6 @@ class StepperController < ApplicationController
         []
       )
     end
-    puts 'la cookieee'
-    puts cookies["user_role"]
       role = Role.find(cookies["user_role"])
       message=''
       if role.name == "admin"

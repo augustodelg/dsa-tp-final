@@ -27,7 +27,7 @@ export default function GeneralStepper(props: PropsWithChildren<Props>) {
     }
     if (newValue > stepperLabel.length - 1) {
       alert("Gracias por jugar ! ")
-      window.location.replace("https://youtu.be/dQw4w9WgXcQ?t=4");
+      window.location.replace("https://youtu.be/dQw4w9WgXcQ");
     }
     setActiveStep(Math.min(newValue, stepperLabel.length - 1))
   }

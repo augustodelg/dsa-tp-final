@@ -1,14 +1,13 @@
+import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import UserServices from "../../../../services/UserServices";
+import { useEffect, useState } from "react";
 import { UserStructure } from "../../../../interfaces/user/UserInterfaces";
-import { MutableRefObject, useEffect, useState } from "react";
-import { Typography } from "@mui/material";
+import UserServices from "../../../../services/UserServices";
 
 interface Props {
   filterUsername: string;
@@ -19,14 +18,13 @@ export default function TableUser(props: Props) {
 
   async function getData() {
     let response;
-    props.filterUsername !== ''
+    props.filterUsername !== ""
       ? (response = await UserServices.getUsersFilterByUsernameData(
           props.filterUsername
         ))
       : (response = await UserServices.getUsersData());
-    
 
-    setUsers(response.payload!);
+    setUsers(response.payload! || []);
   }
 
   useEffect(() => {
@@ -35,8 +33,8 @@ export default function TableUser(props: Props) {
   }, [props.filterUsername]);
 
   return (
-    <TableContainer  component={Paper} sx={{ minWidth: '100%' }}>
-      <Table  aria-label="User Table">
+    <TableContainer component={Paper} sx={{ minWidth: "100%" }}>
+      <Table aria-label="User Table">
         <TableHead>
           <TableRow>
             <TableCell align="right">Username</TableCell>

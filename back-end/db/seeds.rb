@@ -6,10 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-admin = Role.create(name: "admin")
+admin = Role.create(name: "admin", id: 99999)
 user = Role.create(name: "user")
 picante = Role.create(name: "Kevin Mitnick")
-flag = Role.create(name: "flag{User_Boton}")
+flag = Role.create(name: "#{ValidationService.instance.get_flag(0)}")
 
 
 User.create(username: "admin", first_name: "admin", last_name: "admin", age: 999, password: "admin", role_id: admin.id)
@@ -18,5 +18,4 @@ User.create(username: "picante", first_name: "Kevin", last_name: "Mitnick", age:
 User.create(username: "etilgonza", first_name: "Gonzalo", last_name: "Caminos", age: 40, password: "AlaGrandeLePuseCuca", role_id: user.id)
 User.create(username: "garmendia", first_name: "German", last_name: "Namreg", age: 25, password: "AlaGrandeLePuseCuca25", role_id: user.id)
 User.create(username: "taca", first_name: "Augusto", last_name: "Ossorg Eld", age: 23, password: "AlaGrandeLePuseCucaElD", role_id: user.id)
-User.create(username: "garmendia", first_name: "German", last_name: "Namreg", age: 25, password: "AlaGrandeLePuseCuca25", role_id: user.id)
 

@@ -1,8 +1,8 @@
 import { Box } from "@mui/material";
-import React, { PropsWithChildren, useState } from "react";
-import AppInput from "../general/AppInput";
 import Button from '@mui/material/Button';
+import { PropsWithChildren, useState } from "react";
 import GenericService from "../../services/GenericService";
+import AppInput from "../general/AppInput";
 
 interface Props {
   activeStep: number;
@@ -38,7 +38,7 @@ export default function FlagInput(props: PropsWithChildren<Props>) {
           />
         </Box>
         <Box style={{ marginLeft: '1em' }}>
-          <Button onClick={() => handleSubmit()} variant="contained">PROBAR !</Button>
+          <Button onClick={() => handleSubmit()} variant="contained">CHECK</Button>
         </Box>
       </Box>
     </Box>
